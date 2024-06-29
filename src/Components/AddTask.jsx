@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { Axios } from "../App";
+import React, { useContext, useState } from "react";
+import { Axios, myContext } from "../App";
+import TaskList from "./TaskList";
 
 const AddTask = () => {
   const [input, setInput] = useState("");
-
+const {tasks, settasks } = useContext(myContext)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await Axios.post("/add-task", { task: input });
-      const { message } = response.data;
+      const { message, task } = response.data;
+      settasks([...task, task])
       console.log(message);
+      console.log(task);
       setInput("");
     } catch (error) {
       console.error(error);
@@ -30,6 +33,7 @@ const AddTask = () => {
           <button>Add Task</button>
         </form>
       </div>
+      <TaskList />
     </div>
   );
 };

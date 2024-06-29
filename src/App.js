@@ -13,9 +13,9 @@ export const myContext = createContext();
 
 function App() {
   const [tasks, settasks] = useState([]);
-
   const details = {
-    tasks, settasks
+    tasks,
+    settasks
   }
   return (
     <div className="App">
@@ -24,7 +24,7 @@ function App() {
         <Route />
       </Routes> */}
         <AddTask />
-        <TaskList />
+        
       </myContext.Provider>
     </div>
   );
