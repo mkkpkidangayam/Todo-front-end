@@ -12,19 +12,19 @@ export const Axios = axios.create({
 export const myContext = createContext();
 
 function App() {
-  const [tasks, settasks] = useState([]);
+  const [isSubmit, setIsSubmit] = useState(false);
+
   const details = {
-    tasks,
-    settasks
-  }
+    isSubmit,
+    setIsSubmit,
+  };
   return (
     <div className="App">
-      <myContext.Provider value={details} >
+      <myContext.Provider value={details}>
         {/* <Routes>
         <Route />
       </Routes> */}
         <AddTask />
-        
       </myContext.Provider>
     </div>
   );

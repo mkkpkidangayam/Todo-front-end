@@ -4,15 +4,14 @@ import TaskList from "./TaskList";
 
 const AddTask = () => {
   const [input, setInput] = useState("");
-const {tasks, settasks } = useContext(myContext)
+  const { setIsSubmit } = useContext(myContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await Axios.post("/add-task", { task: input });
-      const { message, task } = response.data;
-      settasks([...task, task])
+      const { message } = response.data;
+      setIsSubmit(true);
       console.log(message);
-      console.log(task);
       setInput("");
     } catch (error) {
       console.error(error);
@@ -21,16 +20,17 @@ const {tasks, settasks } = useContext(myContext)
 
   return (
     <div>
-      <h2>Add Task</h2>
+      <h2 className="text-2xl text-emerald-800">Add Task</h2>
       <div>
         <form onSubmit={handleSubmit}>
           <input
+            className="border-2 "
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Add new task"
           />
-          <button>Add Task</button>
+          <button disabled={input === ""}>Add Task</button>
         </form>
       </div>
       <TaskList />

@@ -2,20 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import { Axios, myContext } from "../App";
 
 const TaskList = () => {
-  const { tasks, settasks } = useContext(myContext);
+  const { isSubmit, setIsSubmit } = useContext(myContext);
   const [isloding, setIsLoding] = useState(true);
-  // const [tasks, settasks] = useState([]);
+  const [tasks, settasks] = useState([]);
 
   useEffect(() => {
     Axios.get("/show-task")
       .then((response) => {
         settasks(response.data);
         setIsLoding(false);
+        setIsSubmit(false);
       })
       .catch((error) => {
         console.error("Task getting error", error);
       });
-  }, []);
+  }, [isSubmit]);
 
   const deleteTask = async (taskId) => {
     try {
@@ -55,7 +56,12 @@ const TaskList = () => {
               </td>
               <td style={{ border: "2px solid black" }}>
                 <button>Edit</button>{" "}
-                <button onClick={() => deleteTask(todo._id)}>Delete</button>
+                <button
+                  className="bg-black"
+                  onClick={() => deleteTask(todo._id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
