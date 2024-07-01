@@ -20,7 +20,7 @@ const AddTask = () => {
 
   return (
     <div>
-      <h2 className="text-2xl text-emerald-800">Add Task</h2>
+      <h2 className="text-2xl ">Add Task</h2>
       <div>
         <form onSubmit={handleSubmit}>
           <input
