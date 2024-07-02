@@ -19,21 +19,23 @@ const AddTask = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl ">Add Task</h2>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            className="border-2 "
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Add new task"
-          />
-          <button disabled={input === ""}>Add Task</button>
-        </form>
-      </div>
-      <TaskList />
+    <div className="flex flex-col items-center border-b-2 pb-4">
+      <h2 className="m-2 text-2xl font-bold">ToDo List</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          className="border-2 border-black rounded p-1"
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Add new task"
+        />
+        <button
+          className="mx-1 bg-blue-700 text-white p-1 rounded font-medium hover:bg-blue-600 cursor-pointer"
+          disabled={input === ""}
+        >
+          Add Task
+        </button>
+      </form>
     </div>
   );
 };

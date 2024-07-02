@@ -1,4 +1,3 @@
-import "./App.css";
 import axios from "axios";
 import TaskList from "./Components/TaskList";
 import AddTask from "./Components/AddTask";
@@ -25,6 +24,7 @@ function App() {
         <Route />
       </Routes> */}
         <AddTask />
+        <TaskList />
       </myContext.Provider>
     </div>
   );

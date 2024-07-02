@@ -3,14 +3,14 @@ import { Axios, myContext } from "../App";
 
 const TaskList = () => {
   const { isSubmit, setIsSubmit } = useContext(myContext);
-  const [isloding, setIsLoding] = useState(true);
+  const [isloading, setIsLoading] = useState(true);
   const [tasks, settasks] = useState([]);
 
   useEffect(() => {
     Axios.get("/show-task")
       .then((response) => {
         settasks(response.data);
-        setIsLoding(false);
+        setIsLoading(false);
         setIsSubmit(false);
       })
       .catch((error) => {
@@ -28,7 +28,12 @@ const TaskList = () => {
       console.log(error);
     }
   };
-  if (isloding) {
+
+  const updatetTask = (index) => {
+
+  }
+
+  if (isloading) {
     return (
       <div>
         <h3>Loading...</h3>
@@ -37,31 +42,51 @@ const TaskList = () => {
   }
 
   return (
-    <div>
-      <div>
-        <h1>ToDo List</h1>
-      </div>
+    <div className="mx-5 flex flex-col items-center my-3">
+      {/* <div>
+        <h1 className="text-2xl font-bold border-b-2 border-blue-800">
+          ToDo List
+        </h1>
+      </div> */}
       {tasks.length > 0 ? (
-        <table style={{ width: "100%" }}>
-          <tr style={{ border: "2px solid black" }}>
-            <th style={{ border: "2px solid black" }}>Task</th>
-            <th style={{ border: "2px solid black" }}>Created At</th>
-            <th style={{ border: "2px solid black" }}>Actions</th>
+        <table className="w-11/12 my-3">
+          <tr className="">
+            <th className="text-left text-lg border border-black pl-2">No:</th>
+            <th className="text-left text-lg border border-black pl-2 w-2/3">Task</th>
+            <th className="text-left text-lg border border-black pl-2">Time</th>
+            <th className="text-left text-lg border border-black pl-2">
+              Actions
+            </th>
           </tr>
-          {tasks.map((todo) => (
+          {tasks.map((todo, index) => (
             <tr key={todo._id}>
-              <td style={{ border: "2px solid black" }}>{todo.task}</td>
-              <td style={{ border: "2px solid black" }}>
+              <td className="pl-2 border border-black">{index + 1}</td>
+              <td className="pl-2 border border-black">
+                <div className="flex justify-between">
+                  <span className="pt-1">{todo.task}</span>
+                  <div>
+
+                  <button className="rounded px-1 m-1 border border-black hover:underline ">
+                    Completed
+                  </button>
+                  </div>
+                </div>
+              </td>
+              <td className="pl-2 border border-black">
                 {new Date(todo.createdAt).toLocaleString()}
               </td>
-              <td style={{ border: "2px solid black" }}>
-                <button>Edit</button>{" "}
-                <button
-                  className="bg-black"
-                  onClick={() => deleteTask(todo._id)}
-                >
-                  Delete
-                </button>
+              <td className="pl-2 border border-black ">
+                <div className="flex justify-around">
+                  <button className="rounded px-1 m-1 border border-black hover:underline ">
+                    Edit
+                  </button>
+                  <button
+                    className="rounded px-1 m-1 border border-black hover:underline "
+                    onClick={() => deleteTask(todo._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
