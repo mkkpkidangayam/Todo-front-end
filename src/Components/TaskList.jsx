@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Axios, myContext } from "../App";
-import DoneIcon from '@mui/icons-material/Done';
+import DoneIcon from "@mui/icons-material/Done";
 
 const TaskList = () => {
   const { isSubmit, setIsSubmit } = useContext(myContext);
@@ -49,7 +49,7 @@ const TaskList = () => {
           ToDo List
         </h1>
       </div> */}
-    
+
       {tasks.length > 0 ? (
         <table className="w-11/12 my-3 ">
           <tr className="">
@@ -70,7 +70,7 @@ const TaskList = () => {
                   <span className="pt-1">{todo.task}</span>
                   <div>
                     <button className="rounded px-1 m-1 border hover:border-black hover:text-blue-600 font-medium">
-                      <DoneIcon/>
+                      <DoneIcon />
                     </button>
                   </div>
                 </div>
