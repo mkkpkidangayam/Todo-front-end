@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Axios, myContext } from "../App";
+import DoneIcon from '@mui/icons-material/Done';
 
 const TaskList = () => {
   const { isSubmit, setIsSubmit } = useContext(myContext);
   const [isloading, setIsLoading] = useState(true);
   const [tasks, settasks] = useState([]);
+  const [isEditMode, setisEditMode] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(null);
 
   useEffect(() => {
     Axios.get("/show-task")
@@ -29,9 +32,7 @@ const TaskList = () => {
     }
   };
 
-  const updatetTask = (index) => {
-
-  }
+  const updatetTask = (index) => {};
 
   if (isloading) {
     return (
@@ -42,33 +43,35 @@ const TaskList = () => {
   }
 
   return (
-    <div className="mx-5 flex flex-col items-center my-3">
+    <div className="m-5 flex flex-col items-center shadow-2xl">
       {/* <div>
         <h1 className="text-2xl font-bold border-b-2 border-blue-800">
           ToDo List
         </h1>
       </div> */}
+    
       {tasks.length > 0 ? (
-        <table className="w-11/12 my-3">
+        <table className="w-11/12 my-3 ">
           <tr className="">
-            <th className="text-left text-lg border border-black pl-2">No:</th>
-            <th className="text-left text-lg border border-black pl-2 w-2/3">Task</th>
+            <th className="text-left text-lg border border-black pl-2">No</th>
+            <th className="text-left text-lg border border-black pl-2 w-2/3">
+              Task
+            </th>
             <th className="text-left text-lg border border-black pl-2">Time</th>
             <th className="text-left text-lg border border-black pl-2">
               Actions
             </th>
           </tr>
           {tasks.map((todo, index) => (
-            <tr key={todo._id}>
+            <tr key={todo._id} className="hover:bg-slate-200 ">
               <td className="pl-2 border border-black">{index + 1}</td>
               <td className="pl-2 border border-black">
                 <div className="flex justify-between">
                   <span className="pt-1">{todo.task}</span>
                   <div>
-
-                  <button className="rounded px-1 m-1 border border-black hover:underline ">
-                    Completed
-                  </button>
+                    <button className="rounded px-1 m-1 border hover:border-black hover:text-blue-600 font-medium">
+                      <DoneIcon/>
+                    </button>
                   </div>
                 </div>
               </td>
